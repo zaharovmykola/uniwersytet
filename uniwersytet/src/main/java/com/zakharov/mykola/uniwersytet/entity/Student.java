@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -49,6 +50,6 @@ public class Student {
             name = "student_nauczyciele",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "nauczyciel_id"))
-    Set<Nauczyciel> setofNauczyciele;
+    private Set<Nauczyciel> setofNauczyciele = new HashSet<>(0);
 
 }

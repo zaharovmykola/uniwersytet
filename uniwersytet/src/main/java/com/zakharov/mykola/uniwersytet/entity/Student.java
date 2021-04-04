@@ -22,7 +22,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min=3)
+    @Size(min=3, message = "Imie should be of min size 3")
     @NotBlank(message = "Imie is mandatory")
     @Column(name = "imie", nullable = false, length = 100)
     private String imie;

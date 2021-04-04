@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -26,7 +27,7 @@ public class NauczycielService {
     private NauczycielHibernateDAO nauczycielDao;
 
     public ResponseModel create(NauczycielModel nauczycielModel) {
-        Nauczyciel nauczyciel =
+        @Valid Nauczyciel nauczyciel =
                 Nauczyciel.builder()
                         .imie(nauczycielModel.getImie().trim())
                         .nazwisko(nauczycielModel.getNazwisko().trim())

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class StudentService {
     private StudentHibernateDAO studentDao;
 
     public ResponseModel create(StudentModel studentModel) {
-        Student student =
+        @Valid Student student =
                 Student.builder()
                         .imie(studentModel.getImie().trim())
                         .nazwisko(studentModel.getNazwisko().trim())

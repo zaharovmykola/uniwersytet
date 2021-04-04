@@ -45,11 +45,11 @@ public class Student {
     @Column(name = "kierunek", nullable = false, length = 100)
     private String kierunek;
 
-    @ManyToMany
-    @JoinTable(
-            name = "student_nauczyciele",
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "students_nauczyciele",
             joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "nauczyciel_id"))
+            inverseJoinColumns = @JoinColumn(name = "nauczyciel_id")
+    )
     private Set<Nauczyciel> setofNauczyciele = new HashSet<>(0);
 
 }

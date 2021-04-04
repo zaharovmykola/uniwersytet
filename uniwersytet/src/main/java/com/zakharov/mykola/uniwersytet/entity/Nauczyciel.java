@@ -43,7 +43,7 @@ public class Nauczyciel {
     @Column(name = "przedmiot", nullable = false, length = 100)
     private String przedmiot;
 
-    @ManyToMany(mappedBy = "student_nauczyciele")
+    @ManyToMany(mappedBy = "setofNauczyciele", fetch = FetchType.LAZY)
     private Set<Student> setOfStudents = new HashSet<>(0);
 
 }

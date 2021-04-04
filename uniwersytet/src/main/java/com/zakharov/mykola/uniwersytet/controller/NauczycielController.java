@@ -65,4 +65,14 @@ public class NauczycielController {
         return new ResponseEntity<>(service.getAllStudents(id), HttpStatus.OK);
     }
 
+    @GetMapping("/byImie/{imie}")
+    public ResponseEntity<ResponseModel> getNauczycielByImie(@PathVariable String imie) {
+        return new ResponseEntity<>(service.getNauczycielByImie(imie), HttpStatus.OK);
+    }
+
+    @GetMapping("/byNazwisko/{nazwisko}")
+    public ResponseEntity<ResponseModel> getNauczycielByNazwisko(@PathVariable String nazwisko) {
+        return new ResponseEntity<>(service.getNauczycielByNazwisko(nazwisko), HttpStatus.OK);
+    }
+
 }

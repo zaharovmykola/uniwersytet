@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NauczycielHibernateDAO extends JpaRepository<Nauczyciel, Long>,
         QuerydslPredicateExecutor<Nauczyciel>, QuerydslBinderCustomizer<QNauczyciel> {
-    Student findNauczycielByImie(String imie);
-    Student findNauczycielByNazwisko(String nazwisko);
+    Nauczyciel findNauczycielByImie(String imie);
+    Nauczyciel findNauczycielByNazwisko(String nazwisko);
 
     // добавление поддержки запросов query dsl
     // (предварительно нужно сгенерировать тип QProduct командой

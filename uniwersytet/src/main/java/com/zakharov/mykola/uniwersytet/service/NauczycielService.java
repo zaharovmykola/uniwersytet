@@ -4,11 +4,9 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.zakharov.mykola.uniwersytet.dao.NauczycielHibernateDAO;
 import com.zakharov.mykola.uniwersytet.dao.predicate.NauczycielPredicatesBuilder;
 import com.zakharov.mykola.uniwersytet.entity.Nauczyciel;
-import com.zakharov.mykola.uniwersytet.entity.Student;
 import com.zakharov.mykola.uniwersytet.model.NauczycielModel;
 import com.zakharov.mykola.uniwersytet.model.NauczycielSearchModel;
 import com.zakharov.mykola.uniwersytet.model.ResponseModel;
-import com.zakharov.mykola.uniwersytet.model.StudentModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -172,12 +169,59 @@ public class NauczycielService {
             return ResponseModel.builder()
                     .status(ResponseModel.SUCCESS_STATUS)
                     .data(nauczycielModel)
-                    .message(String.format("Nauczyciele #%s Students Found", nauczyciel.getImie()))
                     .build();
         } else {
             return ResponseModel.builder()
                     .status(ResponseModel.FAIL_STATUS)
                     .message(String.format("Nauczyciel #%d Not Found", id))
+                    .build();
+        }
+    }
+
+    public ResponseModel getNauczycielByImie(String imie) {
+        Nauczyciel nauczyciel = nauczycielDao.findNauczycielByImie(imie);
+        if (nauczyciel != null){
+            NauczycielModel nauczycielModel =
+                    NauczycielModel.builder()
+                            .id(nauczyciel.getId())
+                            .imie(nauczyciel.getImie())
+                            .nazwisko(nauczyciel.getNazwisko())
+                            .wiek(nauczyciel.getWiek())
+                            .email(nauczyciel.getEmail())
+                            .przedmiot(nauczyciel.getPrzedmiot())
+                            .build();
+            return ResponseModel.builder()
+                    .status(ResponseModel.SUCCESS_STATUS)
+                    .data(nauczycielModel)
+                    .build();
+        } else {
+            return ResponseModel.builder()
+                    .status(ResponseModel.FAIL_STATUS)
+                    .message(String.format("Nauczyciel #%s Not Found", imie))
+                    .build();
+        }
+    }
+
+    public ResponseModel getNauczycielByNazwisko(String nazwisko) {
+        Nauczyciel nauczyciel = nauczycielDao.findNauczycielByImie(nazwisko);
+        if (nauczyciel != null){
+            NauczycielModel nauczycielModel =
+                    NauczycielModel.builder()
+                            .id(nauczyciel.getId())
+                            .imie(nauczyciel.getImie())
+                            .nazwisko(nauczyciel.getNazwisko())
+                            .wiek(nauczyciel.getWiek())
+                            .email(nauczyciel.getEmail())
+                            .przedmiot(nauczyciel.getPrzedmiot())
+                            .build();
+            return ResponseModel.builder()
+                    .status(ResponseModel.SUCCESS_STATUS)
+                    .data(nauczycielModel)
+                    .build();
+        } else {
+            return ResponseModel.builder()
+                    .status(ResponseModel.FAIL_STATUS)
+                    .message(String.format("Nauczyciel #%s Not Found", nazwisko))
                     .build();
         }
     }

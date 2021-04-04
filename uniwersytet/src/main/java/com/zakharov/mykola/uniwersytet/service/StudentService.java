@@ -169,12 +169,59 @@ public class StudentService {
             return ResponseModel.builder()
                     .status(ResponseModel.SUCCESS_STATUS)
                     .data(studentModel)
-                    .message(String.format("Nauczyciele of Student #%s Found", student.getImie()))
                     .build();
         } else {
             return ResponseModel.builder()
                     .status(ResponseModel.FAIL_STATUS)
                     .message(String.format("Student #%d Not Found", id))
+                    .build();
+        }
+    }
+
+    public ResponseModel getStudentByImie(String imie) {
+        Student student = studentDao.findStudentByImie(imie);
+        if (student != null){
+            StudentModel studentModel =
+                    StudentModel.builder()
+                            .id(student.getId())
+                            .imie(student.getImie())
+                            .nazwisko(student.getNazwisko())
+                            .wiek(student.getWiek())
+                            .email(student.getEmail())
+                            .kierunek(student.getKierunek())
+                            .build();
+            return ResponseModel.builder()
+                    .status(ResponseModel.SUCCESS_STATUS)
+                    .data(studentModel)
+                    .build();
+        } else {
+            return ResponseModel.builder()
+                    .status(ResponseModel.FAIL_STATUS)
+                    .message(String.format("Student #%s Not Found", imie))
+                    .build();
+        }
+    }
+
+    public ResponseModel getStudentByNazwisko(String nazwisko) {
+        Student student = studentDao.findStudentByNazwisko(nazwisko);
+        if (student != null){
+            StudentModel studentModel =
+                    StudentModel.builder()
+                            .id(student.getId())
+                            .imie(student.getImie())
+                            .nazwisko(student.getNazwisko())
+                            .wiek(student.getWiek())
+                            .email(student.getEmail())
+                            .kierunek(student.getKierunek())
+                            .build();
+            return ResponseModel.builder()
+                    .status(ResponseModel.SUCCESS_STATUS)
+                    .data(studentModel)
+                    .build();
+        } else {
+            return ResponseModel.builder()
+                    .status(ResponseModel.FAIL_STATUS)
+                    .message(String.format("Student #%s Not Found", nazwisko))
                     .build();
         }
     }

@@ -203,7 +203,7 @@ public class NauczycielService {
     }
 
     public ResponseModel getNauczycielByNazwisko(String nazwisko) {
-        Nauczyciel nauczyciel = nauczycielDao.findNauczycielByImie(nazwisko);
+        Nauczyciel nauczyciel = nauczycielDao.findNauczycielByNazwisko(nazwisko);
         if (nauczyciel != null){
             NauczycielModel nauczycielModel =
                     NauczycielModel.builder()
